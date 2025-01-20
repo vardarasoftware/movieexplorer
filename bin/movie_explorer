@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/movie_explorer'
+
+# Create explorer instance
+explorer = MovieExplorer.new
+
+# Example usage
+puts "Movie Explorer CLI"
+puts "1. Search by Title"
+puts "2. Search by IMDB ID"
+print "Choose option: "
+
+choice = gets.chomp.to_i
+
+case choice
+when 1
+  print "Enter movie title: "
+  title = gets.chomp
+  result = "call your logic here"
+when 2
+  print "Enter IMDB ID: "
+  imdb_id = gets.chomp
+  result = "call your logic here"
+else
+  puts "Invalid option"
+  exit
+end
+
+if result
+  puts "Movie Found:"
+  puts result
+else
+  puts "Movie not found"
+end 

@@ -7,6 +7,9 @@ gem 'sqlite3'
 gem 'rubocop', require: false
 
 group :development, :test do
-  gem 'pry'
   gem 'rspec'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'pry'
+  gem 'rubocop'
 end 

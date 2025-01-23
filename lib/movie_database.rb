@@ -85,6 +85,9 @@ class MovieDatabase
   # 2. Removes all existing movie records
   def self.rollback
     # TODO: Implement rollback logic here
+<<<<<<< HEAD
     ActiveRecord::Base.connection.drop_table(:movies, if_exists: true)
+=======
+>>>>>>> 9ca2d69 (add rollback table)
   end
 end

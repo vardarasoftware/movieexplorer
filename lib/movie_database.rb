@@ -51,4 +51,16 @@ class MovieDatabase
     end
   end
 
+
+  # Rolls back the database migration by dropping the movies table
+  #
+  # @return [void]
+  #
+  # This method:
+  # 1. Drops the movies table from the database
+  # 2. Removes all existing movie records
+  def self.rollback
+    # TODO: Implement rollback logic here
+  end
+
 end 

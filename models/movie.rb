@@ -1,4 +1,3 @@
-
   # Schema for the movies table
   # Columns:
   # - title: string (movie title)

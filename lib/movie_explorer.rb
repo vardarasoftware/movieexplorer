@@ -5,6 +5,7 @@ class MovieExplorer
   def initialize
     @api = MovieAPI.new
     @database = MovieDatabase.new
+    MovieDatabase.establish_connection
   end
 
   def search_and_save_by_title(title)
@@ -14,6 +15,8 @@ class MovieExplorer
     movie_data = @api.search_by_title(title)
     # puts movie_data
     if movie_data && movie_data['Response'] == 'True'
+      @database.save_movie(movie_data)
+      puts "Movie data saved successfully for title: #{title}"
       movie_data
     else
       puts "No movie found with title: #{title}"
@@ -34,6 +37,8 @@ class MovieExplorer
     movie_data = @api.search_by_imdb_id(imdb_id)
     # puts movie_data
     if movie_data && movie_data['Response'] == 'True'
+      @database.save_movie(movie_data)
+      puts "Movie data saved successfully for IMDb ID: #{imdb_id}"
       movie_data
     else
       puts "No movie found with imdb_id: #{imdb_id}"

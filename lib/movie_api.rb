@@ -22,7 +22,7 @@ class MovieAPI
   # Search by IMDB ID
   def search_by_imdb_id(imdb_id, options = {})
     ## write logic here to call omdb api
-    response = HTTParty.get("http://www.omdbapi.com/?&apikey=#{@api_key}&i=#{imdb_id}")
+    response = HTTParty.get("#{BASE_URL}/?&apikey=#{@api_key}&i=#{imdb_id}")
     parse_response(response)
   end
 

@@ -2,17 +2,16 @@ require 'active_record'
 require 'sqlite3'
 require 'yaml'
 
-
-
 class MovieDatabase
   def self.setup(env = 'development')
     # Load database configuration
-    
+
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')
 
     # establish connection to the database
   end
+
   # Establishes a connection to the SQLite database based on the specified environment
   #
   # @param env [String] The database environment to connect to (default: 'development')
@@ -50,5 +49,4 @@ class MovieDatabase
       t.timestamps
     end
   end
-
-end 
+end

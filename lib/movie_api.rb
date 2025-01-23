@@ -31,8 +31,7 @@ class MovieAPI
   def parse_response(response)
     # parse raw api responsde data
     if response.success?
-      data = response.parsed_response
-      puts data
+      response.parsed_response
     else
       { error: 'Failed to fetch data', code: response.code, message: response.message }
     end

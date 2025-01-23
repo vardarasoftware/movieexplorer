@@ -2,17 +2,7 @@ require 'active_record'
 require 'sqlite3'
 require 'yaml'
 
-
-
 class MovieDatabase
-  def self.setup(env = 'development')
-    # Load database configuration
-    
-    # Ensure db directory exists
-    FileUtils.mkdir_p('db') unless File.directory?('db')
-
-    # establish connection to the database
-  end
   # Establishes a connection to the SQLite database based on the specified environment
   #
   # @param env [String] The database environment to connect to (default: 'development')
@@ -24,12 +14,12 @@ class MovieDatabase
   # 3. Establishes an ActiveRecord connection using the configuration
   def self.establish_connection(env = 'development')
     # Load database configuration from YAML file
-
+    db_config = YAML.load_file('/home/heesha/Projects/movieexplorer/config/database.yml')
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')
 
     # Establish connection to the database
-    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.establish_connection(db_config['development'])
   end
 
   # Migrates the database to create the movies table
@@ -50,5 +40,4 @@ class MovieDatabase
       t.timestamps
     end
   end
-
-end 
+end

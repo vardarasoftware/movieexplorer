@@ -17,11 +17,11 @@ case choice
 when 1
   print "Enter movie title: "
   title = gets.chomp
-  result = "call your logic here"
+  result = explorer.search_and_save_by_title(title)
 when 2
   print "Enter IMDB ID: "
   imdb_id = gets.chomp
-  result = "call your logic here"
+  result = explorer.search_and_save_by_imdb_id(imdb_id)
 else
   puts "Invalid option"
   exit

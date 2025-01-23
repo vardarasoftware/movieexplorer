@@ -5,6 +5,7 @@ class MovieExplorer
   def initialize
     @api = MovieAPI.new
     @database = MovieDatabase.new
+    MovieDatabase.establish_connection
   end
 
   def search_and_save_by_title(title)
@@ -13,6 +14,7 @@ class MovieExplorer
     # Returns the movie data or nil if no movie is found
     movie = @api.search_by_title(title)
     if valid_result?(movie)
+      @database.save(movie)
       movie
     else
       nil
@@ -31,6 +33,7 @@ class MovieExplorer
     # 3. Returns the movie data or nil
     movie = @api.search_by_imdb_id(imdb_id)
     if valid_result?(movie)
+      @database.save(movie)
       movie
     else
       nil

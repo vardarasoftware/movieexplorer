@@ -1,6 +1,8 @@
 require 'active_record'
 require 'sqlite3'
 require 'yaml'
+require 'fileutils'
+require './models/movie'
 
 class MovieDatabase
   # Establishes a connection to the SQLite database based on the specified environment
@@ -39,5 +41,15 @@ class MovieDatabase
       t.string :poster
       t.timestamps
     end
+  end
+
+  def save(movie_data)
+    movie = Movie.new(
+      title: movie_data['Title'],
+      year: movie_data['Year'],
+      imdb_id: movie_data['imdbID'],
+      poster: movie_data['Poster']
+    )
+    movie.save
   end
 end

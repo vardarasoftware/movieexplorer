@@ -6,30 +6,30 @@ require_relative '../lib/movie_explorer'
 explorer = MovieExplorer.new
 
 # Example usage
-puts "Movie Explorer CLI"
-puts "1. Search by Title"
-puts "2. Search by IMDB ID"
-print "Choose option: "
+puts 'Movie Explorer CLI'
+puts '1. Search by Title'
+puts '2. Search by IMDB ID'
+print 'Choose option: '
 
 choice = gets.chomp.to_i
 
 case choice
 when 1
-  print "Enter movie title: "
+  print 'Enter movie title: '
   title = gets.chomp
-  result = "call your logic here"
+  result = explorer.search_and_save_by_title(title)
 when 2
-  print "Enter IMDB ID: "
+  print 'Enter IMDB ID: '
   imdb_id = gets.chomp
-  result = "call your logic here"
+  result = explorer.search_and_save_by_imdb_id(imdb_id)
 else
-  puts "Invalid option"
+  puts 'Invalid option'
   exit
 end
 
 if result
-  puts "Movie Found:"
+  puts 'Movie Found:'
   puts result
 else
-  puts "Movie not found"
-end 
+  puts 'Movie not found'
+end

@@ -28,8 +28,8 @@ else
 end
 
 if result
-  puts "Movie Found:"
-  puts result
+  # puts "Movie Found:"
+  # puts result
 else
   puts "Movie not found"
 end 

@@ -57,12 +57,13 @@ class MovieDatabase
   end
 
   def save_movie(movie_data)
-    Movie.create(
+    movie = Movie.create(
     title: movie_data['Title'],
     year: movie_data['Year'],
-    imdb_id: movie_data['imdb_ID'],
+    imdb_id: movie_data['imdbID'],
     poster: movie_data['Poster']
     )
+    movie.save
     end
 
 end 

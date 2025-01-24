@@ -9,6 +9,7 @@ require 'active_record'
   # - updated_at: timestamp (when record was last updated)
 
 class Movie < ActiveRecord::Base
+  validates :title, :year, :imdb_id, :poster, presence: true
   ## this is the model for the movie table
   ## in order to interact with the database, you need to create a migration file    
   ## and then create a model file

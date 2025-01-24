@@ -100,6 +100,8 @@ GEM
     sqlite3 (2.5.0-x86_64-darwin)
     sqlite3 (2.5.0-x86_64-linux-gnu)
     sqlite3 (2.5.0-x86_64-linux-musl)
+    table_print (1.5.7)
+    terminal-table (1.6.0)
     timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -134,6 +136,8 @@ DEPENDENCIES
   rspec
   rubocop
   sqlite3
+  table_print
+  terminal-table
   vcr
   webmock
 

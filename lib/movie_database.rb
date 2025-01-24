@@ -3,6 +3,8 @@ require 'sqlite3'
 require 'yaml'
 require 'fileutils'
 require './models/movie'
+require 'fileutils'
+require './models/movie'
 
 class MovieDatabase
   # Establishes a connection to the SQLite database based on the specified environment
@@ -16,6 +18,7 @@ class MovieDatabase
   # 3. Establishes an ActiveRecord connection using the configuration
   def self.establish_connection(env = 'development')
     # Load database configuration from YAML file
+    db_config = YAML.load_file('/home/heesha/Projects/movieexplorer/config/database.yml')
     db_config = YAML.load_file('/home/heesha/Projects/movieexplorer/config/database.yml')
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')

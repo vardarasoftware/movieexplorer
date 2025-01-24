@@ -3,3 +3,5 @@
 .rubocop.yml
 .rspec
 .env
+*.env
+db

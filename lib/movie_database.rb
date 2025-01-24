@@ -1,18 +1,10 @@
 require 'active_record'
 require 'sqlite3'
 require 'yaml'
-
-
+require 'fileutils'
+require './models/movie'
 
 class MovieDatabase
-  def self.setup(env = 'development')
-    # Load database configuration
-    
-    # Ensure db directory exists
-    FileUtils.mkdir_p('db') unless File.directory?('db')
-
-    # establish connection to the database
-  end
   # Establishes a connection to the SQLite database based on the specified environment
   #
   # @param env [String] The database environment to connect to (default: 'development')
@@ -24,12 +16,12 @@ class MovieDatabase
   # 3. Establishes an ActiveRecord connection using the configuration
   def self.establish_connection(env = 'development')
     # Load database configuration from YAML file
-
+    db_config = YAML.load_file('/home/heesha/Projects/movieexplorer/config/database.yml')
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')
 
     # Establish connection to the database
-    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.establish_connection(db_config['development'])
   end
 
   # Migrates the database to create the movies table
@@ -51,7 +43,6 @@ class MovieDatabase
     end
   end
 
-
   # Rolls back the database migration by dropping the movies table
   #
   # @return [void]
@@ -63,4 +54,13 @@ class MovieDatabase
     # TODO: Implement rollback logic here
   end
 
-end 
+  def save(movie_data)
+    movie = Movie.new(
+      title: movie_data['Title'],
+      year: movie_data['Year'],
+      imdb_id: movie_data['imdbID'],
+      poster: movie_data['Poster']
+    )
+    movie.save
+  end
+end

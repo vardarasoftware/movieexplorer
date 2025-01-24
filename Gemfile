@@ -4,6 +4,8 @@ gem 'activerecord'
 gem 'dotenv'
 gem 'httparty'
 gem 'sqlite3'
+gem 'table_print'
+gem 'terminal-table'
 
 group :development, :test do
   gem 'pry'

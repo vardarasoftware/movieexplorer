@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/movie_display'
+
+display = MovieDisplay.new
+
+puts 'Movie Display CLI'
+puts '1. Display All Movies'
+puts '2. Display Recent Movies'
+puts '3. Find Movie by Title'
+puts '4. Find Movie by IMdb-Id'
+print 'Choose option: '
+
+choice = gets.chomp.to_i
+
+case choice
+when 1
+  puts "\nAll Movies in Database:"
+  display.display_all_movies
+when 2
+  print 'Enter number of recent movies to display: '
+  limit = gets.chomp.to_i
+  puts "\nMost Recent Movies:"
+  display.display_recent_movies(limit)
+when 3
+  print 'Enter movie title to find: '
+  title = gets.chomp
+  puts "\nSearching for movie:"
+  display.display_movie_by_title(title)
+when 4
+  print 'Enter movie id to find: '
+  title = gets.chomp
+  puts "\nSearching for movie:"
+  display.display_movie_by_imdb_id(imdb_id)
+else
+  puts 'Invalid option'
+  exit
+end

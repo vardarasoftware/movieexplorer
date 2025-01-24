@@ -1,5 +1,6 @@
 require_relative 'movie_api'
 require_relative 'movie_database'
+require_relative 'show_table'
 
 class MovieExplorer
   def initialize
@@ -15,9 +16,11 @@ class MovieExplorer
     movie_data = @api.search_by_title(title)
     # puts movie_data
     if movie_data && movie_data['Response'] == 'True'
-      @database.save_movie(movie_data)
-      puts "Movie data saved successfully for title: #{title}"
-      movie_data
+      movie_data['Search'].each do |movie|
+        @database.save_movie(movie)
+      end
+      TableDisplay.display_searched_movies(movie_data['Search']) 
+      # movie_data['Search']
     else
       puts "No movie found with title: #{title}"
       nil
@@ -38,8 +41,8 @@ class MovieExplorer
     # puts movie_data
     if movie_data && movie_data['Response'] == 'True'
       @database.save_movie(movie_data)
-      puts "Movie data saved successfully for IMDb ID: #{imdb_id}"
-      movie_data
+      movie_data_arr = [movie_data]
+      TableDisplay.display_searched_movies(movie_data_arr) 
     else
       puts "No movie found with imdb_id: #{imdb_id}"
       nil

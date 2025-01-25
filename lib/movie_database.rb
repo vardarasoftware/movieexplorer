@@ -39,16 +39,36 @@ class MovieDatabase
       t.string :year
       t.string :imdb_id
       t.string :poster
+      t.string :genre
+      t.string :director
+      t.string :language
+      t.string :writer
+      t.string :runtime
       t.timestamps
     end
   end
+
+  # def self.migrate_v2
+  #   ActiveRecord::Base.connection.change_table :movies do |t|
+  #     t.string :genre
+  #     t.string :director
+  #     t.string :language
+  #     t.string :writer
+  #     t.string :runtime
+  #   end
+  # end
 
   def save(movie_data)
     movie = Movie.new(
       title: movie_data['Title'],
       year: movie_data['Year'],
       imdb_id: movie_data['imdbID'],
-      poster: movie_data['Poster']
+      poster: movie_data['Poster'],
+      genre: movie_data['Genre'],
+      director: movie_data['Director'],
+      language: movie_data['Language'],
+      writer: movie_data['Writer'],
+      runtime: movie_data['Runtime']
     )
     movie.save
   end
@@ -62,5 +82,6 @@ class MovieDatabase
   # 2. Removes all existing movie records
   def self.rollback
     # TODO: Implement rollback logic here
+    ActiveRecord::Base.connection.drop_table(:movies, if_exists: true)
   end
 end

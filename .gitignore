@@ -4,3 +4,5 @@
 .rspec
 .env
 *.env
+db
+

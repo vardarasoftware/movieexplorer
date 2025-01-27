@@ -40,6 +40,26 @@ class MovieDatabase
       t.string :year
       t.string :imdb_id
       t.string :poster
+      t.string :rated
+      t.string :released
+      t.string :runtime
+      t.string :genre
+      t.string :director
+      t.string :writer
+      t.string :actors
+      t.text :plot
+      t.string :language
+      t.string :country
+      t.string :awards
+      t.json :ratings    # JSON column for ratings
+      t.string :metascore
+      t.string :imdb_rating
+      t.string :imdb_votes
+      t.string :movie_type
+      t.string :dvd
+      t.string :box_office
+      t.string :production
+      t.string :website
       t.timestamps
     end
   end
@@ -54,14 +74,40 @@ class MovieDatabase
   # 2. Removes all existing movie records
   def self.rollback
     # TODO: Implement rollback logic here
+    if ActiveRecord::Base.connection.table_exists?(:movies)
+      # Drop the movies table
+      ActiveRecord::Base.connection.drop_table :movies
+    else
+      puts "Movies table does not exist."
+    end
   end
 
   def save_movie(movie_data)
     movie = Movie.create(
-    title: movie_data['Title'],
-    year: movie_data['Year'],
-    imdb_id: movie_data['imdbID'],
-    poster: movie_data['Poster']
+      title: movie_data['Title'],
+      year: movie_data['Year'],
+      imdb_id: movie_data['imdbID'],
+      poster: movie_data['Poster'],
+      rated: movie_data['Rated'],
+      released: movie_data['Released'],
+      runtime: movie_data['Runtime'],
+      genre: movie_data['Genre'],
+      director: movie_data['Director'],
+      writer: movie_data['Writer'],
+      actors: movie_data['Actors'],
+      plot: movie_data['Plot'],
+      language: movie_data['Language'],
+      country: movie_data['Country'],
+      awards: movie_data['Awards'],
+      ratings: movie_data['Ratings'],
+      metascore: movie_data['Metascore'],
+      imdb_rating: movie_data['imdbRating'],
+      imdb_votes: movie_data['imdbVotes'],
+      movie_type: movie_data['Type'],
+      dvd: movie_data['DVD'],
+      box_office: movie_data['BoxOffice'],
+      production: movie_data['Production'],
+      website: movie_data['Website']
     )
     movie.save
     end

@@ -6,6 +6,7 @@ gem 'activerecord'
 gem 'sqlite3'
 gem 'rubocop', require: false
 gem 'csv'
+gem 'sinatra'
 
 group :development, :test do
   gem 'rspec'

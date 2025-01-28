@@ -2,3 +2,7 @@
 *.sqlite3
 .rubocop.yml
 .rspec
+.env
+*.env
+db
+

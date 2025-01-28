@@ -1,18 +1,10 @@
 require 'active_record'
 require 'sqlite3'
 require 'yaml'
-
-
+require 'fileutils'
+require './models/movie'
 
 class MovieDatabase
-  def self.setup(env = 'development')
-    # Load database configuration
-    
-    # Ensure db directory exists
-    FileUtils.mkdir_p('db') unless File.directory?('db')
-
-    # establish connection to the database
-  end
   # Establishes a connection to the SQLite database based on the specified environment
   #
   # @param env [String] The database environment to connect to (default: 'development')
@@ -24,12 +16,12 @@ class MovieDatabase
   # 3. Establishes an ActiveRecord connection using the configuration
   def self.establish_connection(env = 'development')
     # Load database configuration from YAML file
-
+    db_config = YAML.load_file('/home/heesha/Projects/movieexplorer/config/database.yml')
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')
 
     # Establish connection to the database
-    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.establish_connection(db_config['development'])
   end
 
   # Migrates the database to create the movies table
@@ -47,10 +39,39 @@ class MovieDatabase
       t.string :year
       t.string :imdb_id
       t.string :poster
+      t.string :genre
+      t.string :director
+      t.string :language
+      t.string :writer
+      t.string :runtime
       t.timestamps
     end
   end
 
+  # def self.migrate_v2
+  #   ActiveRecord::Base.connection.change_table :movies do |t|
+  #     t.string :genre
+  #     t.string :director
+  #     t.string :language
+  #     t.string :writer
+  #     t.string :runtime
+  #   end
+  # end
+
+  def save(movie_data)
+    movie = Movie.new(
+      title: movie_data['Title'],
+      year: movie_data['Year'],
+      imdb_id: movie_data['imdbID'],
+      poster: movie_data['Poster'],
+      genre: movie_data['Genre'],
+      director: movie_data['Director'],
+      language: movie_data['Language'],
+      writer: movie_data['Writer'],
+      runtime: movie_data['Runtime']
+    )
+    movie.save
+  end
 
   # Rolls back the database migration by dropping the movies table
   #
@@ -61,6 +82,6 @@ class MovieDatabase
   # 2. Removes all existing movie records
   def self.rollback
     # TODO: Implement rollback logic here
+    ActiveRecord::Base.connection.drop_table(:movies, if_exists: true)
   end
-
-end 
+end

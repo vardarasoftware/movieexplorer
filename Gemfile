@@ -1,15 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'httparty'
-gem 'dotenv'
 gem 'activerecord'
+gem 'byebug'
+gem 'dotenv'
+gem 'httparty'
 gem 'sqlite3'
-gem 'rubocop', require: false
+gem 'table_print'
+gem 'terminal-table'
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec'
+  gem 'rubocop', require: false
   gem 'vcr'
   gem 'webmock'
-  gem 'pry'
-  gem 'rubocop'
-end 
+end

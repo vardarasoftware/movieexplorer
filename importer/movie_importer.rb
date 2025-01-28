@@ -16,7 +16,7 @@ require 'byebug'
 #   importer.import
 class MovieImporter
   # Path to the CSV file containing movie data
-  CSV_FILE_PATH = '/home/rahul-choudhary/project/ruby assignment/movieexplorer/data/movies_dump.csv'
+  # CSV_FILE_PATH = '/home/rahul-choudhary/project/ruby assignment/movieexplorer/data/movies_dump.csv'
 
   def initialize
     MovieDatabase.establish_connection('development')
@@ -25,14 +25,16 @@ class MovieImporter
   # Imports movies from the CSV file into the database
   #
   # @return [void]
-  def import
+  def import(file)
     Movie.destroy_all
 
-    # db = SQLite3::Database.new 'movies_development.db'
+    # Initialize counters for tracking successful and failed inserts
+    success_count = 0
+    failure_count = 0
+
     # TODO: Implement CSV import logic
-    CSV.foreach(CSV_FILE_PATH, headers: true) do |row|
-      # begin
-        # byebu
+    CSV.foreach(file, headers: true) do |row|
+      begin
         # Extract data from each row in the CSV file
         movie = Movie.create!(
           title: row['Title'],
@@ -60,11 +62,15 @@ class MovieImporter
           production: row['Production'],
           website: row['Website']
         )
-        # puts "Data import complete! #{movie.id}"
-      # rescue => e
-      #   puts "An error occurred: #{e.message}"
-      # end
+        success_count += 1
+      rescue => e
+        failure_count += 1
+        puts "An error occurred: #{e.message}"
+      end
     end
+    puts "Movies imported successfully: #{success_count}"
+    puts "Movies failed to import: #{failure_count}"
+    
     Movie.all
   end
 end

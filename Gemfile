@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'activerecord'
+gem 'byebug'
 gem 'dotenv'
 gem 'httparty'
 gem 'sqlite3'

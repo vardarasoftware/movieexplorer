@@ -14,8 +14,12 @@ class MovieExplorer
     # Returns the movie data or nil if no movie is found
     movie = @api.search_by_title(title)
     if valid_result?(movie)
-      @database.save(movie)
-      movie
+      if movie['Search'] && movie['Search'].any?
+        movie['Search'].each do |m|
+          @database.save(m)
+        end
+      end
+      movie['Search']
     else
       nil
     end

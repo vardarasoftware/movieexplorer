@@ -1,27 +1,42 @@
-## load httparty and dotenv
+require 'httparty'
+require 'dotenv/load'
+require 'json'
 
 class MovieAPI
-  base_uri ''
+  include HTTParty
+  base_uri 'https://www.omdbapi.com'
 
   def initialize
     @api_key = ENV['OMDB_API_KEY']
+    abort("OMDB_API_KEY missing") unless @api_key
   end
 
-  # Search by movie title
-  def search_by_title(title, options = {})
-    ## write logic here to call omdb api
-  end
+  def search_by_title(title)
+    response = self.class.get("/", query: {
+      apikey: @api_key,
+      t: title
+    })
 
-  # Search by IMDB ID
-  def search_by_imdb_id(imdb_id, options = {})
-    ## write logic here to call omdb api
-  end
+    puts response.body
 
-  
+    parse_response(response)
+  end
+  def search_by_imdb_id(imdb_id)
+    response = self.class.get("/",query: {
+      apikey: @api_key,
+      i: imdb_id
+    })
+    puts response.body
+    
+    parse_response(response)
+  end  
 
   private
 
   def parse_response(response)
-    # parse raw api responsde data
+    data = JSON.parse(response.body)
+
+    return nil if data["Response"] == "False"
+    data
   end
-end 
+end

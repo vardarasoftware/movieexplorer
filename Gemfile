@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'httparty'
+gem 'httparty', '~> 0.24.2'
 gem 'dotenv'
 gem 'activerecord'
 gem 'sqlite3'
@@ -11,5 +11,5 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'pry'
-  gem 'rubocop'
+  gem 'byebug'
 end 

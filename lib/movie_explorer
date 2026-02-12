@@ -1,0 +1,60 @@
+require_relative 'movie_api'
+
+class MovieExplorer
+  def initialize
+    @api = MovieAPI.new
+  end
+
+  def search_and_save_by_title(title)
+    movie = @api.search_by_title(title)
+    return nil unless movie
+    movie
+  end
+  def search_and_save_by_imdb_id(imdb_id)
+    movie = @api.search_by_imdb_id(imdb_id)
+    return nil unless movie
+  end  
+end
+
+
+explorer = MovieExplorer.new
+
+puts "Movie Explorer CLI"
+puts "1. Search by Title"
+puts "2. Search by imdb id"
+puts "Choose option: "
+
+choice = gets.chomp.to_i
+
+if choice == 1
+  print "Enter movie title: "
+  title = gets.chomp
+
+  result = explorer.search_and_save_by_title(title)
+
+  if result
+    puts "\nMovie Found:"
+    puts result["Title"]
+    puts result["Year"]
+    puts result["Director"]
+    puts result["imdbRating"]
+  else
+    puts "Movie not found"
+  end
+end
+if choice == 2
+  print "Enter movie imdb id: "
+  imdb_id = gets.chomp
+
+  result = explorer.search_and_save_by_imdb_id(imdb_id)
+
+  if result
+    puts "\nMovie Found:"
+    puts result["Title"]
+    puts result["Year"]
+    puts result["Director"]
+    puts result["imdbRating"]
+  else
+    puts "Movie not found"
+  end
+end  

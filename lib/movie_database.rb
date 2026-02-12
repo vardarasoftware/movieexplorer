@@ -7,6 +7,7 @@ require 'yaml'
 class MovieDatabase
   def self.setup(env = 'development')
     # Load database configuration
+    config = load.@database
     
     # Ensure db directory exists
     FileUtils.mkdir_p('db') unless File.directory?('db')

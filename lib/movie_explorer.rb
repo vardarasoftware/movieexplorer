@@ -1,5 +1,7 @@
 require_relative 'movie_api'
 require_relative 'movie_database'
+require_relative 'save_movie'
+require 'byebug'
 
 class MovieExplorer
   def initialize
@@ -14,7 +16,8 @@ class MovieExplorer
     movie = @api.search_by_title(title)
     return nil unless movie
     
-    @database.save(movie)
+    SaveMovies.save(movie)
+    byebug
 
   end
 
@@ -31,7 +34,7 @@ class MovieExplorer
     movie = @api.search_by_imdb_id(imdb_id)
     return nil unless movie
 
-    @database.save(movie)
+    SaveMovies.save(movie)
   end
 
 end 

@@ -1,3 +1,5 @@
+require 'CSV'
+
 # MovieImporter is responsible for importing movie data from a CSV file
 #
 # This class handles:

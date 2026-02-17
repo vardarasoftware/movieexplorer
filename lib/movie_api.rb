@@ -1,6 +1,7 @@
 require 'httparty'
 require 'dotenv/load'
 require 'json'
+require_relative 'save_movie'
 
 class MovieAPI
   include HTTParty
@@ -16,7 +17,6 @@ class MovieAPI
       apikey: @api_key,
       t: title
     })
-
     puts response.body
 
     parse_response(response)

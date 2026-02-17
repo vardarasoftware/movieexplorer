@@ -1,18 +1,24 @@
 require_relative 'movie_api'
+require_relative 'save_movie'
 
 class MovieExplorer
   def initialize
     @api = MovieAPI.new
+    @save = SaveMovies.new
   end
 
   def search_and_save_by_title(title)
     movie = @api.search_by_title(title)
     return nil unless movie
+    saved = @save.save_movie(movie)
     movie
+  
   end
   def search_and_save_by_imdb_id(imdb_id)
     movie = @api.search_by_imdb_id(imdb_id)
     return nil unless movie
+    saved = @save.save_movie(movie)
+  
   end  
 end
 

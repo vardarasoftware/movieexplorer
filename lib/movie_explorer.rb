@@ -15,9 +15,8 @@ class MovieExplorer
     # Returns the movie data or nil if no movie is found
     movie = @api.search_by_title(title)
     return nil unless movie
-    
-    SaveMovies.save(movie)
     byebug
+    SaveMovies.save_movie(movie)
 
   end
 
@@ -34,7 +33,7 @@ class MovieExplorer
     movie = @api.search_by_imdb_id(imdb_id)
     return nil unless movie
 
-    SaveMovies.save(movie)
+    SaveMovies.save_movie(movie)
   end
 
 end 
